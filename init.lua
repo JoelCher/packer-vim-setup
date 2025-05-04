@@ -4,7 +4,7 @@ require("options")
 -- Ensure LSP is installed using Mason
 require("mason").setup()
 require("mason-lspconfig").setup({
-	ensure_installed = { "clangd" }, -- Automatically install clangd
+	ensure_installer = { "clangd", "ts_ls", "arduino_language_server" }, -- Automatically install clangd
 })
 
 -- LSP Configuration
@@ -18,11 +18,46 @@ lspconfig.clangd.setup({
 	capabilities = require("cmp_nvim_lsp").default_capabilities(),
 })
 
+lspconfig.arduino_language_server.setup({
+	cmd = {
+		"arduino-language-server",
+		"-clangd",
+		"/usr/bin/clangd",
+		"-cli",
+		"/usr/local/bin/arduino-cli",
+		"-cli-config",
+		"~/.arduino15/arduino-cli.yaml",
+		"-fqbn",
+		"arduino:avr:uno",
+	},
+	-- filetypes = { "cpp" },
+	-- root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
+	-- capabilities = require("cmp_nvim_lsp").default_capabilities(),
+})
+
+-- Configure TypeScript Language Server (tsserver)
+lspconfig.ts_ls.setup({
+	on_attach = function(client, bufnr)
+		-- Keybindings for LSP
+		local opts = { noremap = true, silent = true, buffer = bufnr }
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+		vim.keymap.set("n", "K", function()
+			vim.lsp.buf.hover()
+		end, opts)
+
+		-- Disable formatting in favor of a dedicated formatter like `null-ls`
+		client.server_capabilities.documentFormattingProvider = false
+	end,
+	capabilities = require("cmp_nvim_lsp").default_capabilities(), -- if using nvim-cmp
+})
+
 -- Keybindings for LSP
 local opts = { noremap = true, silent = true, buffer = bufnr }
 vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
 
 local cmp = require("cmp")
 
