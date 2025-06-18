@@ -30,6 +30,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.opt.encoding = "utf-8"
 vim.opt.fileencoding = "utf-8"
+-- vim.opt.spell = true
 
 vim.keymap.set("n", "<C-s>", ":w<CR>", { noremap = true, silent = true }) -- Save file
 vim.keymap.set("i", "<C-s>", "<C-c>:w<CR>", { noremap = true, silent = true }) -- Save file
@@ -87,3 +88,12 @@ require("harpoon").setup({
 		tabline_suffix = "   ",
 	},
 })
+
+-- formatting
+vim.api.nvim_create_user_command("Fmt", function()
+	vim.lsp.buf.format({
+		async = true,
+	})
+end, {})
+
+vim.keymap.set("n", "<C-f>", ":Fmt<CR>")

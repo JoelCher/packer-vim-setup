@@ -4,7 +4,7 @@ require("options")
 -- Ensure LSP is installed using Mason
 require("mason").setup()
 require("mason-lspconfig").setup({
-	ensure_installer = { "clangd", "ts_ls", "arduino_language_server" }, -- Automatically install clangd
+	ensure_installer = { "clangd", "ts_ls", "arduino_language_server", "html-lsp" }, -- Automatically install clangd
 })
 
 -- LSP Configuration
@@ -17,6 +17,8 @@ lspconfig.clangd.setup({
 	root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
 	capabilities = require("cmp_nvim_lsp").default_capabilities(),
 })
+
+-- require("cssls").setup({})
 
 lspconfig.arduino_language_server.setup({
 	cmd = {
