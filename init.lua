@@ -12,7 +12,7 @@ local lspconfig = require("lspconfig")
 
 -- Setup clangd for C++ support
 lspconfig.clangd.setup({
-	cmd = { "clangd" },
+	cmd = { "clangd", "--query-driver=/usr/bin/c++" },
 	filetypes = { "c", "cpp", "objc", "objcpp" },
 	root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
 	capabilities = require("cmp_nvim_lsp").default_capabilities(),
