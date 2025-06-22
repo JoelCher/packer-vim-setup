@@ -7,6 +7,15 @@ vim.cmd([[colorscheme tokyonight]])
 
 return require("packer").startup(function(use)
 	-- Packer can manage itself
+	use({
+		"pmizio/typescript-tools.nvim",
+		requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+		config = function()
+			require("typescript-tools").setup({})
+		end,
+	})
+	use("fatih/vim-go")
+	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 	use("wbthomason/packer.nvim")
 	use("nvim-tree/nvim-web-devicons")
 	use("nvim-lua/plenary.nvim")
