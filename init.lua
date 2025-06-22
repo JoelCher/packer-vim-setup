@@ -27,13 +27,16 @@ vim.lsp.enable("gopls")
 
 vim.lsp.config("html", {
 	capabilities = capabilities,
+	filetypes = { "html", "templ", "tmpl" },
 })
 
 vim.filetype.add({
 	extension = {
 		templ = "html", -- or "gotmpl" if using Go templates
+		tmpl = "html",
 	},
 })
+
 vim.lsp.config("cssls", {
 	capabilities = capabilities,
 })
