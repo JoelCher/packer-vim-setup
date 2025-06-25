@@ -2,9 +2,11 @@
 
 -- Only required if you have packer configured as `opt`
 vim.cmd([[packadd packer.nvim]])
+vim.cmd([[colorscheme torte]])
 
 return require("packer").startup(function(use)
 	-- Packer can manage itself
+	use("tpope/vim-fugitive")
 	use({
 		"pmizio/typescript-tools.nvim",
 		requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
@@ -15,7 +17,7 @@ return require("packer").startup(function(use)
 	use({
 		"rose-pine/neovim",
 		config = function()
-			vim.cmd("colorscheme rose-pine")
+			-- vim.cmd("colorscheme rose-pine")
 		end,
 	})
 	use("fatih/vim-go")

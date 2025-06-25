@@ -30,6 +30,7 @@ vim.lsp.config("html", {
 	filetypes = { "html", "templ", "tmpl" },
 })
 
+vim.lsp.enable("tailwindcss")
 vim.filetype.add({
 	extension = {
 		templ = "html", -- or "gotmpl" if using Go templates
