@@ -139,10 +139,40 @@ require("conform").setup({
 		-- You can customize some of the format options for the filetype (:help conform.format)
 		rust = { "rustfmt", lsp_format = "fallback" },
 		-- Conform will run the first available formatter
-		javascript = { "prettierd", "prettier", stop_after_first = true },
+		javascript = { "prettier", "prettierd", stop_after_first = true },
 		cpp = { "clang-format" },
 	},
 })
+
+require("conform").formatters.injected = {
+	-- Set the options field
+	options = {
+		-- Set individual option values
+		ignore_errors = true,
+		lang_to_formatters = {
+			json = { "jq" },
+		},
+
+		ft_parsers = {
+			javascript = "babel",
+			javascriptreact = "babel",
+			typescript = "typescript",
+			typescriptreact = "typescript",
+			--     vue = "vue",
+			css = "css",
+			--     scss = "scss",
+			--     less = "less",
+			html = "html",
+			--     json = "json",
+			--     jsonc = "json",
+			--     yaml = "yaml",
+			--     markdown = "markdown",
+			--     ["markdown.mdx"] = "mdx",
+			--     graphql = "graphql",
+			--     handlebars = "glimmer",
+		},
+	},
+}
 
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*",
@@ -200,3 +230,4 @@ require("typescript-tools").setup({
 		},
 	},
 })
+vim.lsp.set_log_level("ERROR") -- or "WARN"
