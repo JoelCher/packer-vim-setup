@@ -90,10 +90,22 @@ require("harpoon").setup({
 })
 
 -- formatting
-vim.api.nvim_create_user_command("Fmt", function()
-	vim.lsp.buf.format({
-		async = true,
-	})
+vim.api.nvim_create_user_command("Fmt", function(args)
+	local ft = vim.bo.filetype
+	local supported_filetypes = {
+		javascript = true,
+		javascriptreact = true,
+		typescript = true,
+		typescriptreact = true,
+	}
+
+	if supported_filetypes[ft] then
+		require("conform").format({ formatters = { "prettier" }, bufnr = args.bufnr })
+	else
+		vim.lsp.buf.format({
+			async = true,
+		})
+	end
 end, {})
 
 vim.keymap.set("n", "<C-f>", ":Fmt<CR>")
