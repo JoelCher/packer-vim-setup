@@ -8,13 +8,6 @@ return require("packer").startup(function(use)
 	-- Packer can manage itself
 	use("tpope/vim-fugitive")
 	use({
-		"pmizio/typescript-tools.nvim",
-		requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-		config = function()
-			require("typescript-tools").setup({})
-		end,
-	})
-	use({
 		"rose-pine/neovim",
 		config = function()
 			-- vim.cmd("colorscheme rose-pine")
