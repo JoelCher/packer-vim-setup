@@ -22,6 +22,18 @@ lspconfig.clangd.setup({
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+local base_on_attach = vim.lsp.config.eslint.on_attach
+vim.lsp.config("eslint", {
+	on_attach = function(client, bufnr)
+		if not base_on_attach then return end
+
+		base_on_attach(client, bufnr)
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			buffer = bufnr,
+			command = "LspEslintFixAll",
+		})
+	end,
+})
 vim.lsp.enable("golangci_lint_ls")
 vim.lsp.enable("gopls")
 
@@ -31,6 +43,7 @@ vim.lsp.config("html", {
 })
 
 vim.lsp.enable("tailwindcss")
+vim.lsp.enable("pyright")
 vim.filetype.add({
 	extension = {
 		templ = "html", -- or "gotmpl" if using Go templates
@@ -47,8 +60,6 @@ vim.lsp.enable("htmx")
 lspconfig.htmx.setup({})
 vim.lsp.enable("cssls")
 
-
-
 vim.lsp.config("ts_go_ls", {
 	cmd = { vim.loop.os_homedir() .. "/dev/typescript-go/built/local/tsgo", "lsp", "-stdio" },
 	filetypes = {
@@ -62,9 +73,6 @@ vim.lsp.config("ts_go_ls", {
 	root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
 })
 vim.lsp.enable("ts_go_ls")
-
-
-
 
 -- require("cssls").setup({})
 
@@ -101,8 +109,8 @@ lspconfig.ts_ls.setup({
 	end,
 	capabilities = require("cmp_nvim_lsp").default_capabilities(), -- if using nvim-cmp
 	settings = {
-		exclude = { "**/node_modules" }
-	}
+		exclude = { "**/node_modules" },
+	},
 })
 
 -- Keybindings for LSP
@@ -135,7 +143,7 @@ require("neodev").setup()
 lspconfig.lua_ls.setup({
 	settings = {
 		Lua = {
-			runtime = { version = "LuaJIT" }, -- Use LuaJIT for Neovim
+			runtime = { version = "LuaJIT" },   -- Use LuaJIT for Neovim
 			diagnostics = { globals = { "vim" } }, -- Recognize `vim` as a global
 			workspace = {
 				library = {
@@ -155,9 +163,9 @@ vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 require("conform").setup({
 	formatters_by_ft = {
-		lua = { "stylua" },
+		Lua = { "stylua" },
 		-- Conform will run multiple formatters sequentially
-		-- python = { "isort", "black" },
+		python = { "isort", "black" },
 		-- You can customize some of the format options for the filetype (:help conform.format)
 		rust = { "rustfmt", lsp_format = "fallback" },
 		-- Conform will run the first available formatter

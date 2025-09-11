@@ -2,13 +2,13 @@ vim.opt.number = true -- Show absolute line numbers
 vim.opt.relativenumber = true -- Show relative line numbers
 vim.opt.mouse = "a" -- Enable mouse support in all modes
 vim.opt.expandtab = true -- Convert tabs to spaces
-vim.opt.shiftwidth = 4 -- Number of spaces for indentation
-vim.opt.tabstop = 4 -- Number of spaces per tab
-vim.opt.softtabstop = 4 -- Number of spaces inserted when pressing Tab
+vim.opt.shiftwidth = 2 -- Number of spaces for indentation
+vim.opt.tabstop = 2 -- Number of spaces per tab
+vim.opt.softtabstop = 2 -- Number of spaces inserted when pressing Tab
 vim.opt.smartindent = true -- Auto-indent when starting a new line
 vim.opt.expandtab = false -- Use real tabs
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
 vim.opt.wrap = true -- Enable line wrapping
 vim.opt.linebreak = true -- Wrap without breaking words
 vim.opt.breakindent = true -- Indent wrapped lines to match indentation
@@ -102,9 +102,8 @@ vim.api.nvim_create_user_command("Fmt", function(args)
 	if supported_filetypes[ft] then
 		require("conform").format({ formatters = { "prettier" }, bufnr = args.bufnr })
 	else
-		vim.lsp.buf.format({
-			async = true,
-		})
+		require("conform").format({ bufnr = args.bufnr })
+		vim.lsp.buf.format()
 	end
 end, {})
 
