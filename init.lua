@@ -4,9 +4,26 @@ require("options")
 -- Ensure LSP is installed using Mason
 require("mason").setup()
 require("mason-lspconfig").setup({
-	ensure_installer = { "clangd", "arduino_language_server", "html-lsp", "htmx-lsp", "gopls", "ts_ls", "lua_ls" },
+	ensure_installer = { "clangd", "arduino_language_server", "html-lsp", "htmx-lsp", "gopls", "vtsls", "lua_ls" },
 })
 
+local cmp = require("cmp")
+
+cmp.setup({
+	snippet = {
+		expand = function(args)
+			require("luasnip").lsp_expand(args.body)
+		end,
+	},
+	mapping = {
+		["<Tab>"] = cmp.mapping.select_next_item(),
+		["<S-Tab>"] = cmp.mapping.select_prev_item(),
+		["<CR>"] = cmp.mapping.confirm({ select = true }),
+	},
+	sources = {
+		{ name = "nvim_lsp" },
+	},
+})
 -- LSP Configuration
 local lspconfig = vim.lsp.config
 
@@ -58,7 +75,7 @@ vim.lsp.config("cssls", {
 })
 
 vim.lsp.enable("html")
-vim.lsp.enable("htmx")
+-- vim.lsp.enable("htmx")
 lspconfig("htmx", {})
 vim.lsp.enable("cssls")
 
@@ -89,13 +106,15 @@ vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
 
 -- Configure TypeScript Language Server (tsserver)
-lspconfig("ts_ls", {
+lspconfig("vtsls", {
 	on_attach = function(client, bufnr)
 		-- Keybindings for LSP
 		local opts = { noremap = true, silent = true, buffer = bufnr }
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+		vim.keymap.set("n", "K", function()
+			vim.lsp.buf.hover()
+		end, opts)
 		-- Disable formatting in favor of a dedicated formatter like `null-ls`
 		client.server_capabilities.documentFormattingProvider = false
 	end,
@@ -105,27 +124,9 @@ lspconfig("ts_ls", {
 		exclude = { "**/node_modules" },
 	},
 })
-vim.lsp.enable("ts_ls")
 
-local cmp = require("cmp")
-
-cmp.setup({
-	snippet = {
-		expand = function(args)
-			require("luasnip").lsp_expand(args.body)
-		end,
-	},
-	mapping = {
-		["<Tab>"] = cmp.mapping.select_next_item(),
-		["<S-Tab>"] = cmp.mapping.select_prev_item(),
-		["<CR>"] = cmp.mapping.confirm({ select = true }),
-	},
-	sources = {
-		{ name = "nvim_lsp" },
-	},
-})
 -- Load Neodev (for better Lua support in Neovim)
-require("neodev").setup()
+-- require("neodev").setup()
 
 lspconfig("lua_ls", {
 	settings = {
