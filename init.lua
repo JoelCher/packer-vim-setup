@@ -4,7 +4,7 @@ require("options")
 -- Ensure LSP is installed using Mason
 require("mason").setup()
 require("mason-lspconfig").setup({
-	ensure_installer = { "clangd", "arduino_language_server", "html-lsp", "htmx-lsp", "gopls" }, -- Automatically install clangd
+	ensure_installer = { "clangd", "arduino_language_server", "html-lsp", "htmx-lsp", "gopls", "ts_ls", "lua_ls" },
 })
 
 -- LSP Configuration
@@ -62,20 +62,6 @@ vim.lsp.enable("htmx")
 lspconfig("htmx", {})
 vim.lsp.enable("cssls")
 
-vim.lsp.config("ts_go_ls", {
-	cmd = { vim.loop.os_homedir() .. "/dev/typescript-go/built/local/tsgo", "lsp", "-stdio" },
-	filetypes = {
-		"javascript",
-		"javascriptreact",
-		"javascript.jsx",
-		"typescript",
-		"typescriptreact",
-		"typescript.tsx",
-	},
-	root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
-})
-vim.lsp.enable("ts_go_ls")
-
 -- require("cssls").setup({})
 
 lspconfig("arduino_language_server", {
@@ -95,29 +81,31 @@ lspconfig("arduino_language_server", {
 	-- capabilities = require("cmp_nvim_lsp").default_capabilities(),
 })
 
--- Configure TypeScript Language Server (tsserver)
-lspconfig("ts_ls.setup", {
-	on_attach = function(client, bufnr)
-		-- Keybindings for LSP
-		local opts = { noremap = true, silent = true, buffer = bufnr }
-		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-
-		-- Disable formatting in favor of a dedicated formatter like `null-ls`
-		client.server_capabilities.documentFormattingProvider = false
-	end,
-	capabilities = require("cmp_nvim_lsp").default_capabilities(), -- if using nvim-cmp
-	settings = {
-		exclude = { "**/node_modules" },
-	},
-})
-
 -- Keybindings for LSP
 local opts = { noremap = true, silent = true, buffer = bufnr }
 vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
+
+-- Configure TypeScript Language Server (tsserver)
+lspconfig("ts_ls", {
+	on_attach = function(client, bufnr)
+		-- Keybindings for LSP
+		local opts = { noremap = true, silent = true, buffer = bufnr }
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+		-- Disable formatting in favor of a dedicated formatter like `null-ls`
+		client.server_capabilities.documentFormattingProvider = false
+	end,
+
+	capabilities = require("cmp_nvim_lsp").default_capabilities(), -- if using nvim-cmp
+	settings = {
+		exclude = { "**/node_modules" },
+	},
+})
+vim.lsp.enable("ts_ls")
 
 local cmp = require("cmp")
 
@@ -139,7 +127,7 @@ cmp.setup({
 -- Load Neodev (for better Lua support in Neovim)
 require("neodev").setup()
 
-lspconfig("lua_ls.setup", {
+lspconfig("lua_ls", {
 	settings = {
 		Lua = {
 			runtime = { version = "LuaJIT" }, -- Use LuaJIT for Neovim
