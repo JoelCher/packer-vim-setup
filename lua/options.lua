@@ -3,10 +3,6 @@ vim.opt.relativenumber = true -- Show relative line numbers
 vim.opt.mouse = "a" -- Enable mouse support in all modes
 vim.opt.expandtab = true -- Convert tabs to spaces
 vim.opt.shiftwidth = 2 -- Number of spaces for indentation
-<<<<<<< HEAD
-=======
-vim.opt.tabstop = 2 -- Number of spaces per tab
->>>>>>> 7b7944a5b0b1e503dce2a924a301c39dabf6408f
 vim.opt.softtabstop = 2 -- Number of spaces inserted when pressing Tab
 vim.opt.smartindent = true -- Auto-indent when starting a new line
 vim.opt.expandtab = false -- Use real tabs

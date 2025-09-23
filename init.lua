@@ -8,13 +8,13 @@ require("mason-lspconfig").setup({
 })
 
 -- LSP Configuration
-local lspconfig = require("lspconfig")
+local lspconfig = vim.lsp.config
 
 -- Setup clangd for C++ support
-lspconfig.clangd.setup({
+lspconfig("clangd", {
 	cmd = { "clangd", "--query-driver=/usr/bin/c++" },
 	filetypes = { "c", "cpp", "objc", "objcpp" },
-	root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
+	-- root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
 	capabilities = require("cmp_nvim_lsp").default_capabilities(),
 })
 
@@ -25,7 +25,9 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 local base_on_attach = vim.lsp.config.eslint.on_attach
 vim.lsp.config("eslint", {
 	on_attach = function(client, bufnr)
-		if not base_on_attach then return end
+		if not base_on_attach then
+			return
+		end
 
 		base_on_attach(client, bufnr)
 		vim.api.nvim_create_autocmd("BufWritePre", {
@@ -57,7 +59,7 @@ vim.lsp.config("cssls", {
 
 vim.lsp.enable("html")
 vim.lsp.enable("htmx")
-lspconfig.htmx.setup({})
+lspconfig("htmx", {})
 vim.lsp.enable("cssls")
 
 vim.lsp.config("ts_go_ls", {
@@ -76,7 +78,7 @@ vim.lsp.enable("ts_go_ls")
 
 -- require("cssls").setup({})
 
-lspconfig.arduino_language_server.setup({
+lspconfig("arduino_language_server", {
 	cmd = {
 		"arduino-language-server",
 		"-clangd",
@@ -94,15 +96,12 @@ lspconfig.arduino_language_server.setup({
 })
 
 -- Configure TypeScript Language Server (tsserver)
-lspconfig.ts_ls.setup({
+lspconfig("ts_ls.setup", {
 	on_attach = function(client, bufnr)
 		-- Keybindings for LSP
 		local opts = { noremap = true, silent = true, buffer = bufnr }
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-		vim.keymap.set("n", "K", function()
-			vim.lsp.buf.hover()
-		end, opts)
 
 		-- Disable formatting in favor of a dedicated formatter like `null-ls`
 		client.server_capabilities.documentFormattingProvider = false
@@ -140,10 +139,10 @@ cmp.setup({
 -- Load Neodev (for better Lua support in Neovim)
 require("neodev").setup()
 
-lspconfig.lua_ls.setup({
+lspconfig("lua_ls.setup", {
 	settings = {
 		Lua = {
-			runtime = { version = "LuaJIT" },   -- Use LuaJIT for Neovim
+			runtime = { version = "LuaJIT" }, -- Use LuaJIT for Neovim
 			diagnostics = { globals = { "vim" } }, -- Recognize `vim` as a global
 			workspace = {
 				library = {

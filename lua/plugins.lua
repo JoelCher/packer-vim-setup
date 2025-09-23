@@ -9,8 +9,8 @@ return require("packer").startup(function(use)
 	--
 	-- use("null-ls")
 	-- use("my-plugin")
-	use({ "~/plugins/focus-mode.nvim" })
-	use({ "~/plugins/nvim-encrypt.nvim" })
+	-- use({ "~/plugins/focus-mode.nvim" })
+	-- use({ "~/plugins/nvim-encrypt.nvim" })
 	use("tpope/vim-fugitive")
 	use({
 		"rose-pine/neovim",
