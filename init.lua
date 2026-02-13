@@ -76,7 +76,7 @@ vim.lsp.config("cssls", {
 
 vim.lsp.enable("html")
 -- vim.lsp.enable("htmx")
-lspconfig("htmx", {})
+-- lspconfig("htmx", {})
 vim.lsp.enable("cssls")
 
 -- require("cssls").setup({})
@@ -87,15 +87,16 @@ lspconfig("arduino_language_server", {
 		"-clangd",
 		"/usr/bin/clangd",
 		"-cli",
-		"/usr/local/bin/arduino-cli",
+		"/usr/bin/arduino-cli",
 		"-cli-config",
-		"~/.arduino15/arduino-cli.yaml",
+		"/home/joelcher/.arduino15/arduino-cli.yaml",
 		"-fqbn",
 		"arduino:avr:uno",
 	},
-	-- filetypes = { "cpp" },
-	-- root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
-	-- capabilities = require("cmp_nvim_lsp").default_capabilities(),
+	filetypes = { "arduino", "cpp", "c", "ino" },
+	root_dir = require("lspconfig.util").root_pattern(".git", "*.ino", "compile_commands.json", ".pio"),
+
+	capabilities = require("cmp_nvim_lsp").default_capabilities(),
 })
 
 -- Keybindings for LSP
@@ -104,6 +105,8 @@ vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
+
+vim.keymap.set("i", "<C-space>", cmp.mapping.complete(), { desc = "Trigger completion" })
 
 -- Configure TypeScript Language Server (tsserver)
 lspconfig("vtsls", {
