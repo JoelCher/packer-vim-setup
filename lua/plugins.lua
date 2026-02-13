@@ -19,7 +19,6 @@ return require("packer").startup(function(use)
 		end,
 	})
 	use("fatih/vim-go")
-	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 	use("wbthomason/packer.nvim")
 	use("nvim-tree/nvim-web-devicons")
 	use("nvim-lua/plenary.nvim")
@@ -27,7 +26,6 @@ return require("packer").startup(function(use)
 	use("neovim/nvim-lspconfig")            -- LSP configurations
 	use("hrsh7th/nvim-cmp")                 -- Completion plugin
 	use("hrsh7th/cmp-nvim-lsp")             -- LSP source for nvim-cmp
-	use("L3MON4D3/LuaSnip")                 -- Snippets engine
 	use("williamboman/mason.nvim")          -- Package manager for LSPs
 	use("williamboman/mason-lspconfig.nvim") -- Bridges Mason and LSPConfig
 	use("L3MON4D3/LuaSnip")                 -- Snippet engine

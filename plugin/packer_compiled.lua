@@ -156,7 +156,7 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
   ["nvim-ts-autotag"] = {
-    config = { "\27LJ\2\n傜1\0\0\5\0\n\0\r6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0025\3\a\0005\4\6\0=\4\b\3=\3\t\2B\0\2\1K\0\1\0\17per_filetype\thtml\1\0\1\thtml\0\1\0\1\17enable_close\1\topts\1\0\2\17per_filetype\0\topts\0\1\0\3\17enable_close\2\26enable_close_on_slash\1\18enable_rename\2\nsetup\20nvim-ts-autotag\frequire\0" },
+    config = { "\27LJ\2\n傜1\0\0\5\0\n\0\r6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\0025\3\a\0005\4\6\0=\4\b\3=\3\t\2B\0\2\1K\0\1\0\17per_filetype\thtml\1\0\1\thtml\0\1\0\1\17enable_close\1\topts\1\0\2\topts\0\17per_filetype\0\1\0\3\18enable_rename\2\17enable_close\2\26enable_close_on_slash\1\nsetup\20nvim-ts-autotag\frequire\0" },
     loaded = false,
     needs_bufread = false,
     only_cond = false,
@@ -196,7 +196,7 @@ _G.packer_plugins = {
     url = "https://github.com/folke/tokyonight.nvim"
   },
   ["trouble.nvim"] = {
-    config = { "\27LJ\2\n許5\0\0\5\0\f\0\0236\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0004\3\0\0=\3\4\0024\3\a\0005\4\5\0>\4\1\0035\4\6\0>\4\2\0035\4\a\0>\4\3\0035\4\b\0>\4\4\0035\4\t\0>\4\5\0035\4\n\0>\4\6\3=\3\v\2B\0\2\1K\0\1\0\tkeys\1\3\1\0\15<leader>xQ#<cmd>Trouble qflist toggle<cr>\tdesc\28Quickfix List (Trouble)\1\3\1\0\15<leader>xL$<cmd>Trouble loclist toggle<cr>\tdesc\28Location List (Trouble)\1\3\1\0\15<leader>cl?<cmd>Trouble lsp toggle focus=false win.position=right<cr>\tdesc1LSP Definitions / references / ... (Trouble)\1\3\1\0\15<leader>cs0<cmd>Trouble symbols toggle focus=false<cr>\tdesc\22Symbols (Trouble)\1\3\1\0\15<leader>xX5<cmd>Trouble diagnostics toggle filter.buf=0<cr>\tdesc!Buffer Diagnostics (Trouble)\1\3\1\0\15<leader>xx(<cmd>Trouble diagnostics toggle<cr>\tdesc\26Diagnostics (Trouble)\topts\1\0\3\topts\0\tkeys\0\bcmd\fTrouble\nsetup\ftrouble\frequire\0" },
+    config = { "\27LJ\2\n許5\0\0\5\0\f\0\0236\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0004\3\0\0=\3\4\0024\3\a\0005\4\5\0>\4\1\0035\4\6\0>\4\2\0035\4\a\0>\4\3\0035\4\b\0>\4\4\0035\4\t\0>\4\5\0035\4\n\0>\4\6\3=\3\v\2B\0\2\1K\0\1\0\tkeys\1\3\1\0\15<leader>xQ#<cmd>Trouble qflist toggle<cr>\tdesc\28Quickfix List (Trouble)\1\3\1\0\15<leader>xL$<cmd>Trouble loclist toggle<cr>\tdesc\28Location List (Trouble)\1\3\1\0\15<leader>cl?<cmd>Trouble lsp toggle focus=false win.position=right<cr>\tdesc1LSP Definitions / references / ... (Trouble)\1\3\1\0\15<leader>cs0<cmd>Trouble symbols toggle focus=false<cr>\tdesc\22Symbols (Trouble)\1\3\1\0\15<leader>xX5<cmd>Trouble diagnostics toggle filter.buf=0<cr>\tdesc!Buffer Diagnostics (Trouble)\1\3\1\0\15<leader>xx(<cmd>Trouble diagnostics toggle<cr>\tdesc\26Diagnostics (Trouble)\topts\1\0\3\tkeys\0\topts\0\bcmd\fTrouble\nsetup\ftrouble\frequire\0" },
     loaded = true,
     path = "/home/joel/.local/share/nvim/site/pack/packer/start/trouble.nvim",
     url = "https://github.com/folke/trouble.nvim"
@@ -214,35 +214,35 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: neovim
-time([[Config for neovim]], true)
-try_loadstring("\27LJ\2\n\v\0\0\1\0\0\0\1K\0\1\0\0", "config", "neovim")
-time([[Config for neovim]], false)
--- Config for: oil.nvim
-time([[Config for oil.nvim]], true)
-try_loadstring("\27LJ\2\n1\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\boil\frequire\0", "config", "oil.nvim")
-time([[Config for oil.nvim]], false)
--- Config for: conform.nvim
-time([[Config for conform.nvim]], true)
-try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fconform\frequire\0", "config", "conform.nvim")
-time([[Config for conform.nvim]], false)
--- Config for: Comment.nvim
-time([[Config for Comment.nvim]], true)
-try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
-time([[Config for Comment.nvim]], false)
--- Config for: trouble.nvim
-time([[Config for trouble.nvim]], true)
-try_loadstring("\27LJ\2\n許5\0\0\5\0\f\0\0236\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0004\3\0\0=\3\4\0024\3\a\0005\4\5\0>\4\1\0035\4\6\0>\4\2\0035\4\a\0>\4\3\0035\4\b\0>\4\4\0035\4\t\0>\4\5\0035\4\n\0>\4\6\3=\3\v\2B\0\2\1K\0\1\0\tkeys\1\3\1\0\15<leader>xQ#<cmd>Trouble qflist toggle<cr>\tdesc\28Quickfix List (Trouble)\1\3\1\0\15<leader>xL$<cmd>Trouble loclist toggle<cr>\tdesc\28Location List (Trouble)\1\3\1\0\15<leader>cl?<cmd>Trouble lsp toggle focus=false win.position=right<cr>\tdesc1LSP Definitions / references / ... (Trouble)\1\3\1\0\15<leader>cs0<cmd>Trouble symbols toggle focus=false<cr>\tdesc\22Symbols (Trouble)\1\3\1\0\15<leader>xX5<cmd>Trouble diagnostics toggle filter.buf=0<cr>\tdesc!Buffer Diagnostics (Trouble)\1\3\1\0\15<leader>xx(<cmd>Trouble diagnostics toggle<cr>\tdesc\26Diagnostics (Trouble)\topts\1\0\3\topts\0\tkeys\0\bcmd\fTrouble\nsetup\ftrouble\frequire\0", "config", "trouble.nvim")
-time([[Config for trouble.nvim]], false)
 -- Config for: telescope.nvim
 time([[Config for telescope.nvim]], true)
 try_loadstring("\27LJ\2\n汻1\0\0\5\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\6\0005\3\4\0005\4\3\0=\4\5\3=\3\a\2B\0\2\1K\0\1\0\rdefualts\1\0\1\rdefualts\0\25file_ignore_patterns\1\0\1\25file_ignore_patterns\0\1\b\0\0\17node_modules\n.git/\v%.lock\n%.log\f%.cache\vbuild/\rexternal\nsetup\14telescope\frequire\0", "config", "telescope.nvim")
 time([[Config for telescope.nvim]], false)
+-- Config for: conform.nvim
+time([[Config for conform.nvim]], true)
+try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fconform\frequire\0", "config", "conform.nvim")
+time([[Config for conform.nvim]], false)
+-- Config for: oil.nvim
+time([[Config for oil.nvim]], true)
+try_loadstring("\27LJ\2\n1\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\boil\frequire\0", "config", "oil.nvim")
+time([[Config for oil.nvim]], false)
+-- Config for: trouble.nvim
+time([[Config for trouble.nvim]], true)
+try_loadstring("\27LJ\2\n許5\0\0\5\0\f\0\0236\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0004\3\0\0=\3\4\0024\3\a\0005\4\5\0>\4\1\0035\4\6\0>\4\2\0035\4\a\0>\4\3\0035\4\b\0>\4\4\0035\4\t\0>\4\5\0035\4\n\0>\4\6\3=\3\v\2B\0\2\1K\0\1\0\tkeys\1\3\1\0\15<leader>xQ#<cmd>Trouble qflist toggle<cr>\tdesc\28Quickfix List (Trouble)\1\3\1\0\15<leader>xL$<cmd>Trouble loclist toggle<cr>\tdesc\28Location List (Trouble)\1\3\1\0\15<leader>cl?<cmd>Trouble lsp toggle focus=false win.position=right<cr>\tdesc1LSP Definitions / references / ... (Trouble)\1\3\1\0\15<leader>cs0<cmd>Trouble symbols toggle focus=false<cr>\tdesc\22Symbols (Trouble)\1\3\1\0\15<leader>xX5<cmd>Trouble diagnostics toggle filter.buf=0<cr>\tdesc!Buffer Diagnostics (Trouble)\1\3\1\0\15<leader>xx(<cmd>Trouble diagnostics toggle<cr>\tdesc\26Diagnostics (Trouble)\topts\1\0\3\tkeys\0\topts\0\bcmd\fTrouble\nsetup\ftrouble\frequire\0", "config", "trouble.nvim")
+time([[Config for trouble.nvim]], false)
+-- Config for: neovim
+time([[Config for neovim]], true)
+try_loadstring("\27LJ\2\n\v\0\0\1\0\0\0\1K\0\1\0\0", "config", "neovim")
+time([[Config for neovim]], false)
+-- Config for: Comment.nvim
+time([[Config for Comment.nvim]], true)
+try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
+time([[Config for Comment.nvim]], false)
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'nvim-ts-autotag', 'nvim-autopairs'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
+vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'nvim-autopairs', 'nvim-ts-autotag'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 

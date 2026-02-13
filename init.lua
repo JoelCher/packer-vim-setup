@@ -4,10 +4,17 @@ require("options")
 -- Ensure LSP is installed using Mason
 require("mason").setup()
 require("mason-lspconfig").setup({
-	ensure_installer = { "clangd", "arduino_language_server", "html-lsp", "htmx-lsp", "gopls", "vtsls", "lua_ls" },
+	ensure_installer = { "clangd", "arduino_language_server", "html-lsp",  "gopls",  "lua_ls","vtsls" },
 })
 
 local cmp = require("cmp")
+
+ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+    underline = true,
+    virtual_text = false,
+    signs = true,
+    update_in_insert = false,
+  })
 
 cmp.setup({
 	snippet = {
@@ -31,9 +38,11 @@ local lspconfig = vim.lsp.config
 lspconfig("clangd", {
 	cmd = { "clangd", "--query-driver=/usr/bin/c++" },
 	filetypes = { "c", "cpp", "objc", "objcpp" },
-	-- root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
+	-- root_dir = require("lspconfig.utils").root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
+	-- root_dir=vim.fs.root(0,{"compile_commands.json", "compile_flags.txt", ".git"})
 	capabilities = require("cmp_nvim_lsp").default_capabilities(),
 })
+vim.lsp.enable("clangd")
 
 --Enable (broadcasting) snippet capability for completion
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -53,6 +62,8 @@ vim.lsp.config("eslint", {
 		})
 	end,
 })
+vim.lsp.enable('eslint')
+
 vim.lsp.enable("golangci_lint_ls")
 vim.lsp.enable("gopls")
 
@@ -60,6 +71,9 @@ vim.lsp.config("html", {
 	capabilities = capabilities,
 	filetypes = { "html", "templ", "tmpl" },
 })
+
+
+vim.lsp.enable('docker_compose_language_service')
 
 vim.lsp.enable("tailwindcss")
 vim.lsp.enable("pyright")
@@ -76,27 +90,29 @@ vim.lsp.config("cssls", {
 
 vim.lsp.enable("html")
 -- vim.lsp.enable("htmx")
-lspconfig("htmx", {})
+-- lspconfig("htmx", {})
 vim.lsp.enable("cssls")
 
+vim.lsp.enable('astro')
 -- require("cssls").setup({})
 
-lspconfig("arduino_language_server", {
-	cmd = {
-		"arduino-language-server",
-		"-clangd",
-		"/usr/bin/clangd",
-		"-cli",
-		"/usr/local/bin/arduino-cli",
-		"-cli-config",
-		"~/.arduino15/arduino-cli.yaml",
-		"-fqbn",
-		"arduino:avr:uno",
-	},
-	-- filetypes = { "cpp" },
-	-- root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
-	-- capabilities = require("cmp_nvim_lsp").default_capabilities(),
-})
+-- lspconfig("arduino_language_server", {
+-- 	cmd = {
+-- 		"arduino-language-server",
+-- 		"-clangd",
+-- 		"/usr/bin/clangd",
+-- 		"-cli",
+-- 		"/usr/local/bin/arduino-cli",
+-- 		"-cli-config",
+-- 		"~/.arduino15/arduino-cli.yaml",
+-- 		"-fqbn",
+-- 		"arduino:avr:uno",
+-- 	},
+-- 	filetypes = { "cpp" ,"c"},
+-- 	-- root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
+-- 	capabilities = require("cmp_nvim_lsp").default_capabilities(),
+-- })
+-- vim.lsp.enable("arduino_language_server")
 
 -- Keybindings for LSP
 local opts = { noremap = true, silent = true, buffer = bufnr }
@@ -105,7 +121,6 @@ vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
 
--- Configure TypeScript Language Server (tsserver)
 lspconfig("vtsls", {
 	on_attach = function(client, bufnr)
 		-- Keybindings for LSP
@@ -125,6 +140,7 @@ lspconfig("vtsls", {
 	},
 })
 
+vim.lsp.enable("vtsls")
 -- Load Neodev (for better Lua support in Neovim)
 -- require("neodev").setup()
 
