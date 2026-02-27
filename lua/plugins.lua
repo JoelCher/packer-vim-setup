@@ -2,7 +2,7 @@
 
 -- Only required if you have packer configured as `opt`
 vim.cmd([[packadd packer.nvim]])
-vim.cmd([[colorscheme torte]])
+vim.cmd([[colorscheme gruber-darker]])
 
 return require("packer").startup(function(use)
 	-- Packer can manage itself
@@ -11,26 +11,27 @@ return require("packer").startup(function(use)
 	-- use("my-plugin")
 	-- use({ "~/plugins/focus-mode.nvim" })
 	-- use({ "~/plugins/nvim-encrypt.nvim" })
+
 	use("tpope/vim-fugitive")
-	use({
-		"rose-pine/neovim",
-		config = function()
-			-- vim.cmd("colorscheme rose-pine")
-		end,
-	})
+	-- use({
+	-- 	"rose-pine/neovim",
+	-- 	config = function()
+	-- 		-- vim.cmd("colorscheme rose-pine")
+	-- 	end,
+	-- })
 	use("fatih/vim-go")
 	use("wbthomason/packer.nvim")
 	use("nvim-tree/nvim-web-devicons")
 	use("nvim-lua/plenary.nvim")
 	use("ThePrimeagen/harpoon")
-	use("neovim/nvim-lspconfig")            -- LSP configurations
-	use("hrsh7th/nvim-cmp")                 -- Completion plugin
-	use("hrsh7th/cmp-nvim-lsp")             -- LSP source for nvim-cmp
-	use("williamboman/mason.nvim")          -- Package manager for LSPs
+	use("neovim/nvim-lspconfig") -- LSP configurations
+	use("hrsh7th/nvim-cmp") -- Completion plugin
+	use("hrsh7th/cmp-nvim-lsp") -- LSP source for nvim-cmp
+	use("williamboman/mason.nvim") -- Package manager for LSPs
 	use("williamboman/mason-lspconfig.nvim") -- Bridges Mason and LSPConfig
-	use("L3MON4D3/LuaSnip")                 -- Snippet engine
-	use("folke/neodev.nvim")                -- Lua-specific enhancements
-	use("folke/tokyonight.nvim")
+	use("L3MON4D3/LuaSnip") -- Snippet engine
+	use("folke/neodev.nvim") -- Lua-specific enhancements
+	-- use("folke/tokyonight.nvim")
 	use("echasnovski/mini.nvim")
 	use("echasnovski/mini.move")
 	use({
@@ -126,8 +127,8 @@ return require("packer").startup(function(use)
 			require("nvim-ts-autotag").setup({
 				opts = {
 					-- Defaults
-					enable_close = true,      -- Auto close tags
-					enable_rename = true,     -- Auto rename pairs of tags
+					enable_close = true, -- Auto close tags
+					enable_rename = true, -- Auto rename pairs of tags
 					enable_close_on_slash = false, -- Auto close on trailing </
 				},
 				-- Also override individual filetype configs, these take priority.
@@ -141,6 +142,9 @@ return require("packer").startup(function(use)
 			})
 		end,
 	})
+
+	use("blazkowolf/gruber-darker.nvim")
+
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		config = function()

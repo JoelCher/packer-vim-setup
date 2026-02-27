@@ -4,17 +4,17 @@ require("options")
 -- Ensure LSP is installed using Mason
 require("mason").setup()
 require("mason-lspconfig").setup({
-	ensure_installer = { "clangd", "arduino_language_server", "html-lsp",  "gopls",  "lua_ls","vtsls" },
+	ensure_installer = { "clangd", "arduino_language_server", "html-lsp", "gopls", "lua_ls", "vtsls" },
 })
 
 local cmp = require("cmp")
 
- vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    underline = true,
-    virtual_text = false,
-    signs = true,
-    update_in_insert = false,
-  })
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+	underline = true,
+	virtual_text = false,
+	signs = true,
+	update_in_insert = false,
+})
 
 cmp.setup({
 	snippet = {
@@ -62,7 +62,7 @@ vim.lsp.config("eslint", {
 		})
 	end,
 })
-vim.lsp.enable('eslint')
+vim.lsp.enable("eslint")
 
 vim.lsp.enable("golangci_lint_ls")
 vim.lsp.enable("gopls")
@@ -72,8 +72,7 @@ vim.lsp.config("html", {
 	filetypes = { "html", "templ", "tmpl" },
 })
 
-
-vim.lsp.enable('docker_compose_language_service')
+vim.lsp.enable("docker_compose_language_service")
 
 vim.lsp.enable("tailwindcss")
 vim.lsp.enable("pyright")
@@ -93,9 +92,8 @@ vim.lsp.enable("html")
 -- lspconfig("htmx", {})
 vim.lsp.enable("cssls")
 
-vim.lsp.enable('astro')
+vim.lsp.enable("astro")
 -- require("cssls").setup({})
-
 
 -- Keybindings for LSP
 local opts = { noremap = true, silent = true, buffer = bufnr }
